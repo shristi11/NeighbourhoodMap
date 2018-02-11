@@ -100,6 +100,14 @@ var Location = function(data) {
     
 };
     
+
+function vm() {
+
+    var self = this;
+
+    this.searchTerm = ko.observable("");
+
+    this.LocationList = ko.observableArray([]);
     
 var styles = [
 
@@ -281,3 +289,10 @@ var map = new google.maps.Map(document.getElementById('map'), {
     mapTypeControl: false
 
 });
+}
+
+function initMap() {
+
+    ko.applyBindings(new vm());
+
+}
