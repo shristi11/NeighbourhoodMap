@@ -1,4 +1,38 @@
 
+var locations = [
+
+    {
+        name: 'Metropolitan Museum of Art',
+        lat: 40.779090041589036,
+        lng: -73.9628431280359
+    },
+
+    {
+        name: 'Whitney Museum of American Art',
+        lat: 40.739521922152555,
+        lng: -74.00893351271802
+    },
+
+    {
+        name: 'American Museum of Natural History',
+        lat: 40.78093997311628,
+        lng: -73.97330640287038
+    },
+
+    {
+        name: 'Museum of Modern Art (MOMA)',
+        lat: 40.76141278917594,
+        lng: -73.97693369182005
+    },
+
+    {
+        name: 'Museum of Arts & Design (MAD)',
+        lat: 40.76783725449877,
+        lng: -73.98201866843489
+    }
+
+];
+
 var Location = function(data) {
 
     var self = this;
