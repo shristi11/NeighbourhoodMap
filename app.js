@@ -80,6 +80,31 @@ var Location = function(data) {
 
     });
     
+     this.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
+        '<div class="content"><a href="' + self.URL + '">' + self.URL + "</a></div>" +
+
+        '<div class="content">' + self.street + "</div>" +
+
+        '<div class="content">' + self.city + "</div>" +
+
+        '<div class="content">' + self.phone + "</div></div>";
+
+
+
+    this.infoWindow = new google.maps.InfoWindow({ content: self.contentString });
+
+
+
+    this.marker = new google.maps.Marker({
+
+        position: new google.maps.LatLng(data.lat, data.lng),
+
+        map: map,
+
+        title: data.name
+
+    });
+    
 };
     
     
