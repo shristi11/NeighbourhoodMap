@@ -1,3 +1,52 @@
+
+var Location = function(data) {
+
+    var self = this;
+
+    this.name = data.name;
+
+    this.lat = data.lat;
+
+    this.lng = data.lng;
+
+    this.URL = "";
+
+    this.street = "";
+
+    this.city = "";
+
+    this.phone = "";
+
+
+
+    this.visible = ko.observable(true);
+
+
+
+    var foursquareURL = 'https://api.foursquare.com/v2/venues/search?ll=' + this.lat + ',' + this.lng + '&client_id=WRNEXLJS211EBGSXX4RIIAWNG013BUPIPOTQCPOYQHSCPVOO&client_secret=Q3PTN0M2H0IEC52MVFO3HVUKQEU4CWX5WPLVLYCFAG0SW1BV&v=20131016' + '&query=' + this.name;
+
+
+
+
+    $.getJSON(foursquareURL).done(function(data) {
+
+        var results = data.response.venues[0];
+
+        self.URL = results.url;
+
+        self.street = results.location.formattedAddress[0];
+
+        self.city = results.location.formattedAddress[1];
+
+        self.phone = results.contact.phone;
+
+    }).fail(function() {
+
+        alert("There was an error loading the data. Please try again.");
+
+    });
+    
+    
 var styles = [
 
     {
