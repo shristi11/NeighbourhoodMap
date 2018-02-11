@@ -80,6 +80,8 @@ var Location = function(data) {
 
     });
     
+};
+    
     
 var styles = [
 
