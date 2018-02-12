@@ -98,6 +98,27 @@ var Location = function(data) {
 
     });
     
+     this.marker.addListener('click', function() {
+
+        self.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
+
+            '<div class="content"><a href="' + self.URL + '">' + self.URL + "</a></div>" +
+
+            '<div class="content">' + self.street + "</div>" +
+
+            '<div class="content">' + self.city + "</div>" +
+
+            '<div class="content"><a href="tel:' + self.phone + '">' + self.phone + "</a></div></div>";
+
+        self.infoWindow.setContent(self.contentString);
+
+        self.infoWindow.open(map, this);
+
+        self.marker.setAnimation(google.maps.Animation.BOUNCE);
+
+
+    });
+    
 };
     
 
