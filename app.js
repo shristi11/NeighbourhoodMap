@@ -109,9 +109,9 @@ function vm() {
 
     this.LocationList = ko.observableArray([]);
     
-var styles = [
+  var styles = [
 
-    {
+      {
 
         featureType: 'water',
 
@@ -123,7 +123,7 @@ var styles = [
 
         ]
 
-    }, {
+      }, {
 
         featureType: 'administrative',
 
@@ -141,7 +141,7 @@ var styles = [
 
         ]
 
-    }, {
+      }, {
 
         featureType: 'administrative',
 
@@ -155,7 +155,7 @@ var styles = [
 
         ]
 
-    }, {
+      }, {
 
         featureType: 'road.highway',
 
@@ -173,7 +173,7 @@ var styles = [
 
         ]
 
-    }, {
+      }, {
 
         featureType: 'transit.station',
 
@@ -189,7 +189,7 @@ var styles = [
 
         ]
 
-    }, {
+      }, {
 
         featureType: 'road.highway',
 
@@ -203,7 +203,7 @@ var styles = [
 
         ]
 
-    }, {
+      }, {
 
         featureType: 'water',
 
@@ -217,7 +217,7 @@ var styles = [
 
         ]
 
-    }, {
+      }, {
 
         featureType: 'water',
 
@@ -231,7 +231,7 @@ var styles = [
 
         ]
 
-    }, {
+      }, {
 
         featureType: 'poi',
 
@@ -249,7 +249,7 @@ var styles = [
 
         ]
 
-    }, {
+      }, {
 
         featureType: 'road.highway',
 
@@ -269,48 +269,48 @@ var styles = [
 
     }
 
-];
+  ];
 
 
 
 // Constructor creates a new map - only center and zoom are required.
 
-  var map = new google.maps.Map(document.getElementById('map'), {
+    var map = new google.maps.Map(document.getElementById('map'), {
 
-    center: {
+      center: {
         lat: 40.7413549,
         lng: -73.9980244
-    },
+      },
 
-    zoom: 13,
+      zoom: 13,
 
-    styles: styles,
+      styles: styles,
 
-    mapTypeControl: false
+      mapTypeControl: false
 
-   });
+     });
     
        locations.forEach(function(locationItem) {
         self.LocationList.push(new Location(locationItem));
-    });
+      });
 
-    this.filteredList = ko.computed(function() {
+      this.filteredList = ko.computed(function() {
 
-        var filter = self.searchTerm().toLowerCase();
+          var filter = self.searchTerm().toLowerCase();
 
-        if (!filter) {
+          if (!filter) {
 
-            self.LocationList().forEach(function(locationItem) {
+              self.LocationList().forEach(function(locationItem) {
 
-                locationItem.visible(true);
+                  locationItem.visible(true);
 
-            });
+              });
 
-            return self.LocationList();
+              return self.LocationList();
 
-        } else {
+           } else {
 
-            return ko.utils.arrayFilter(self.LocationList(), function(locationItem) {
+              return ko.utils.arrayFilter(self.LocationList(), function(locationItem) {
 
                 var string = locationItem.name.toLowerCase();
 
