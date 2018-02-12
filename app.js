@@ -275,7 +275,7 @@ var styles = [
 
 // Constructor creates a new map - only center and zoom are required.
 
-var map = new google.maps.Map(document.getElementById('map'), {
+  var map = new google.maps.Map(document.getElementById('map'), {
 
     center: {
         lat: 40.7413549,
@@ -288,7 +288,45 @@ var map = new google.maps.Map(document.getElementById('map'), {
 
     mapTypeControl: false
 
-});
+   });
+    
+       locations.forEach(function(locationItem) {
+        self.LocationList.push(new Location(locationItem));
+    });
+
+    this.filteredList = ko.computed(function() {
+
+        var filter = self.searchTerm().toLowerCase();
+
+        if (!filter) {
+
+            self.LocationList().forEach(function(locationItem) {
+
+                locationItem.visible(true);
+
+            });
+
+            return self.LocationList();
+
+        } else {
+
+            return ko.utils.arrayFilter(self.LocationList(), function(locationItem) {
+
+                var string = locationItem.name.toLowerCase();
+
+                var result = (string.search(filter) >= 0);
+
+                locationItem.visible(result);
+
+                return result;
+
+            });
+
+        }
+
+    }, self);
+     
+
 }
 
 function initMap() {
