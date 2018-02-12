@@ -11,7 +11,14 @@
 </head>
 
 <body>
-    <input type="text" placeholder="Search" />
+    <input data-bind="textInput: searchTerm, valueUpdate: 'afterkeydown'" />
+
+
+    <ul data-bind="foreach: filteredList">
+
+        <li data-bind="text: name, click: bounce"></li>
+
+    </ul>
 
 
 
