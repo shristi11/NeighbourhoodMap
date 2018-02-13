@@ -11,18 +11,25 @@
 </head>
 
 <body>
-    <input data-bind="textInput: searchTerm, valueUpdate: 'afterkeydown'" />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <form>
+                    <div class="input-group-btn">
+                       <input type="text" class="form-control" placeholder="Search" data-bind="textInput: searchTerm, valueUpdate: 'afterkeydown'" />
+                    </div>
+                </form>
+                 <ul data-bind="foreach: filteredList">
 
+                     <li data-bind="text: name, click: bounce"></li>
 
-    <ul data-bind="foreach: filteredList">
-
-        <li data-bind="text: name, click: bounce"></li>
-
-    </ul>
-
+                 </ul>
+            </div>
+        </div>
 
 
     <div id="map"></div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
