@@ -1,3 +1,7 @@
+// TODO: Create a map variable
+var map;
+
+// These are locations to visit
 
 var locations = [
 
@@ -32,6 +36,11 @@ var locations = [
     }
 
 ];
+
+
+// Foursquare API
+
+
 
 var Location = function(data) {
 
@@ -79,7 +88,7 @@ var Location = function(data) {
         alert("There was an error loading the data. Please try again.");
 
     });
-    
+
 
 
 
@@ -97,8 +106,28 @@ var Location = function(data) {
         title: data.name
 
     });
-    
-     this.marker.addListener('click', function() {
+
+
+
+    this.showMarker = ko.computed(function() {
+
+        if (this.visible() === true) {
+
+            this.marker.setMap(map);
+
+        } else {
+
+            this.marker.setMap(null);
+
+        }
+
+        return true;
+
+    }, this);
+
+
+
+    this.marker.addListener('click', function() {
 
         self.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
 
@@ -116,11 +145,22 @@ var Location = function(data) {
 
         self.marker.setAnimation(google.maps.Animation.BOUNCE);
 
+        setTimeout(function() {
+            self.marker.setAnimation(null);
+        }, 2100);
 
     });
-    
+
+    this.bounce = function(place) {
+
+        google.maps.event.trigger(self.marker, 'click');
+
+    };
+
 };
-    
+
+
+// Google Maps API
 
 function vm() {
 
@@ -129,209 +169,212 @@ function vm() {
     this.searchTerm = ko.observable("");
 
     this.LocationList = ko.observableArray([]);
-    
-  var styles = [
 
-      {
+    // Create a styles array to use with the map.
 
-        featureType: 'water',
+    var styles = [
 
-        stylers: [
+        {
 
-            {
-                color: '#19a0d8'
-            }
+            featureType: 'water',
 
-        ]
+            stylers: [
 
-      }, {
+                {
+                    color: '#19a0d8'
+                }
 
-        featureType: 'administrative',
+            ]
 
-        elementType: 'labels.text.stroke',
+        }, {
 
-        stylers: [
+            featureType: 'administrative',
 
-            {
-                color: '#ffffff'
-            },
+            elementType: 'labels.text.stroke',
 
-            {
-                weight: 6
-            }
+            stylers: [
 
-        ]
+                {
+                    color: '#ffffff'
+                },
 
-      }, {
+                {
+                    weight: 6
+                }
 
-        featureType: 'administrative',
+            ]
 
-        elementType: 'labels.text.fill',
+        }, {
 
-        stylers: [
+            featureType: 'administrative',
 
-            {
-                color: '#e85113'
-            }
+            elementType: 'labels.text.fill',
 
-        ]
+            stylers: [
 
-      }, {
+                {
+                    color: '#e85113'
+                }
 
-        featureType: 'road.highway',
+            ]
 
-        elementType: 'geometry.stroke',
+        }, {
 
-        stylers: [
+            featureType: 'road.highway',
 
-            {
-                color: '#efe9e4'
-            },
+            elementType: 'geometry.stroke',
 
-            {
-                lightness: -40
-            }
+            stylers: [
 
-        ]
+                {
+                    color: '#efe9e4'
+                },
 
-      }, {
+                {
+                    lightness: -40
+                }
 
-        featureType: 'transit.station',
+            ]
 
-        stylers: [
+        }, {
 
-            {
-                weight: 9
-            },
+            featureType: 'transit.station',
 
-            {
-                hue: '#e85113'
-            }
+            stylers: [
 
-        ]
+                {
+                    weight: 9
+                },
 
-      }, {
+                {
+                    hue: '#e85113'
+                }
 
-        featureType: 'road.highway',
+            ]
 
-        elementType: 'labels.icon',
+        }, {
 
-        stylers: [
+            featureType: 'road.highway',
 
-            {
-                visibility: 'off'
-            }
+            elementType: 'labels.icon',
 
-        ]
+            stylers: [
 
-      }, {
+                {
+                    visibility: 'off'
+                }
 
-        featureType: 'water',
+            ]
 
-        elementType: 'labels.text.stroke',
+        }, {
 
-        stylers: [
+            featureType: 'water',
 
-            {
-                lightness: 100
-            }
+            elementType: 'labels.text.stroke',
 
-        ]
+            stylers: [
 
-      }, {
+                {
+                    lightness: 100
+                }
 
-        featureType: 'water',
+            ]
 
-        elementType: 'labels.text.fill',
+        }, {
 
-        stylers: [
+            featureType: 'water',
 
-            {
-                lightness: -100
-            }
+            elementType: 'labels.text.fill',
 
-        ]
+            stylers: [
 
-      }, {
+                {
+                    lightness: -100
+                }
 
-        featureType: 'poi',
+            ]
 
-        elementType: 'geometry',
+        }, {
 
-        stylers: [
+            featureType: 'poi',
 
-            {
-                visibility: 'on'
-            },
+            elementType: 'geometry',
 
-            {
-                color: '#f0e4d3'
-            }
+            stylers: [
 
-        ]
+                {
+                    visibility: 'on'
+                },
 
-      }, {
+                {
+                    color: '#f0e4d3'
+                }
 
-        featureType: 'road.highway',
+            ]
 
-        elementType: 'geometry.fill',
+        }, {
 
-        stylers: [
+            featureType: 'road.highway',
 
-            {
-                color: '#efe9e4'
-            },
+            elementType: 'geometry.fill',
 
-            {
-                lightness: -25
-            }
+            stylers: [
 
-        ]
+                {
+                    color: '#efe9e4'
+                },
 
-    }
+                {
+                    lightness: -25
+                }
 
-  ];
+            ]
 
+        }
 
+    ];
 
-// Constructor creates a new map - only center and zoom are required.
 
-    var map = new google.maps.Map(document.getElementById('map'), {
 
-      center: {
-        lat: 40.7413549,
-        lng: -73.9980244
-      },
+    // Constructor creates a new map - only center and zoom are required.
 
-      zoom: 13,
+    map = new google.maps.Map(document.getElementById('map'), {
 
-      styles: styles,
+        center: {
+            lat: 40.7413549,
+            lng: -73.9980244
+        },
 
-      mapTypeControl: false
+        zoom: 13,
 
-     });
-    
-       locations.forEach(function(locationItem) {
+        styles: styles,
+
+        mapTypeControl: false
+
+    });
+
+
+    locations.forEach(function(locationItem) {
         self.LocationList.push(new Location(locationItem));
-      });
+    });
 
-      this.filteredList = ko.computed(function() {
+    this.filteredList = ko.computed(function() {
 
-          var filter = self.searchTerm().toLowerCase();
+        var filter = self.searchTerm().toLowerCase();
 
-          if (!filter) {
+        if (!filter) {
 
-              self.LocationList().forEach(function(locationItem) {
+            self.LocationList().forEach(function(locationItem) {
 
-                  locationItem.visible(true);
+                locationItem.visible(true);
 
-              });
+            });
 
-              return self.LocationList();
+            return self.LocationList();
 
-           } else {
+        } else {
 
-              return ko.utils.arrayFilter(self.LocationList(), function(locationItem) {
+            return ko.utils.arrayFilter(self.LocationList(), function(locationItem) {
 
                 var string = locationItem.name.toLowerCase();
 
@@ -346,9 +389,10 @@ function vm() {
         }
 
     }, self);
-     
+
 
 }
+
 
 function initMap() {
 
