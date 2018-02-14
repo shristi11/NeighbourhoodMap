@@ -342,6 +342,7 @@ function vm() {
 
         center: {
             lat: 40.7413549,
+
             lng: -73.9980244
         },
 
@@ -398,4 +399,8 @@ function initMap() {
 
     ko.applyBindings(new vm());
 
+}
+
+function errorHandling() {
+    alert("Something went wrong. Try refreshing the page");
 }
