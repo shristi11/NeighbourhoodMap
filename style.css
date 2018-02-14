@@ -1,3 +1,4 @@
+
 html,
 body {
     font-family: Arial, sans-serif;
@@ -26,6 +27,7 @@ h1 {
     bottom: 0px;
     height: 100%;
     left: 362px;
+    top: 242px;
     position: absolute;
     right: 0px;
 }
