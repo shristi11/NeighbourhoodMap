@@ -92,8 +92,9 @@ var Location = function(data) {
 
 
 
-
-    this.infoWindow = new google.maps.InfoWindow({ content: self.contentString });
+    this.infoWindow = new google.maps.InfoWindow({
+        content: self.contentString
+    });
 
 
 
