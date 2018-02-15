@@ -7,11 +7,6 @@ body {
     padding: 0;
 }
 
-.container {
-    height: 100%;
-    position: relative;
-}
-
 input {
     font-size: 12px;
 }
