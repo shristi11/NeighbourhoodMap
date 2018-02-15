@@ -1,4 +1,5 @@
 
+
 html,
 body {
     font-family: Arial, sans-serif;
@@ -24,6 +25,7 @@ h1 {
     top: 242px;
     position: absolute;
     right: 0px;
+    left: 0px;
 }
 
 .text {
